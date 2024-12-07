@@ -5,28 +5,32 @@ import DessertsSection from './Component/DessertsSection';
 import PizzaSection from './Component/PizzaSection';
 import SaladSection from './Component/SaladSection';
 import SoupSection from './Component/SoupSection';
+import axios from 'axios';
 
 const OurMenu = () => {
-    const [foods, setFoods] = useState([])
+    const [todaysOffer, setTodaysOffer] = useState([])
+    const [desserts, setDesserts] = useState([])
+    const [pizzas, setPizzas] = useState([])
+    const [salads, setSalads] = useState([])
+    const [soups, setSoups] = useState([])
     useEffect(() => {
-        fetch('/fakeData.json')
-        .then(res => res.json())
-        .then(data => setFoods(data))
+        const fetchData = async () => {
+        const [offerRes, dessertRes, pizzaRes, saladRes, soupRes] = await Promise.all([
+            axios.get('http://localhost:3000/foodMenu?category=offered'),
+            axios.get('http://localhost:3000/foodMenu?category=dessert&limit=6'),
+            axios.get('http://localhost:3000/foodMenu?category=pizza&limit=9'),
+            axios.get('http://localhost:3000/foodMenu?category=salad&limit=8'),
+            axios.get('http://localhost:3000/foodMenu?category=soup&limit=6'),
+        ]);
+  
+        setTodaysOffer(offerRes.data);
+        setDesserts(dessertRes.data);
+        setPizzas(pizzaRes.data);
+        setSalads(saladRes.data);
+        setSoups(soupRes.data);
+        }
+        fetchData();
     },[])
-    // offer Food
-    const todaysOffer = foods.filter(food => food.category === "offered")
-    // Dessert Food
-    const AllDesserts = foods.filter(food => food.category === "dessert")
-    const desserts = AllDesserts.slice(0,6)
-    // Pizza
-    const AllPizzas = foods.filter(food => food.category === "pizza")
-    const pizzas = AllPizzas.slice(0,9)
-    // Salads
-    const AllSalads = foods.filter(food => food.category === "salad")
-    const salads = AllSalads.slice(0,8)
-    // Soups
-    const AllSoups = foods.filter(food => food.category === "soup")
-    const soups = AllSalads.slice(0,6)
     return (
         <div>
             <Banner></Banner>

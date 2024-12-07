@@ -2,7 +2,7 @@ import React from 'react';
 import { IoMenu } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaCircleUser } from "react-icons/fa6";
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 const Navbar = () => {
     return (
         <div className='relative z-50 bg-[#151515] bg-opacity-50'>
@@ -19,28 +19,28 @@ const Navbar = () => {
                         <ul
                           tabIndex={0}
                           className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-[1] mt-3 w-fit px-5 p-2 shadow text-[15px]">
-                          <li><a>Home</a></li>
-                          <li><a>Contact us</a></li>
-                          <li><a>Dashboard</a></li>
-                          <li><a>Our Menu</a></li>
-                          <li><a>Our Shop</a></li>
-                          <li><a>Shopping Cart</a></li>
-                          <li><a>Sign Out</a></li>
+                          <li><NavLink to={'/'}>Home</NavLink></li>
+                          <li><NavLink to={'/contactUs'}>Contact us</NavLink></li>
+                          <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+                          <li><NavLink to={'/ourMenu'}>Our Menu</NavLink></li>
+                          <li><NavLink to={'/ourShop'}>Our Shop</NavLink></li>
+                          <li><Link>Shopping Cart</Link></li>
+                          <li>Sign Out</li>
                         </ul>
                     </div>  
                     <div className=" hidden lg:flex">
                         <ul className="menu menu-horizontal px-1 items-center text-[15px] font-bold">
-                            <li><NavLink>Home</NavLink></li>
-                            <li><NavLink>Contact us</NavLink></li>
-                            <li><NavLink>Dashboard</NavLink></li>
-                            <li><NavLink>Our Menu</NavLink></li>
-                            <li><NavLink>Our Shop</NavLink></li>
-                            <li><NavLink><FiShoppingCart className='w-5 h-5' /></NavLink></li>
+                            <li><NavLink to={'/'}>Home</NavLink></li>
+                            <li><NavLink to={'/contactUs'}>Contact us</NavLink></li>
+                            <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+                            <li><NavLink to={'/ourMenu'}>Our Menu</NavLink></li>
+                            <li><NavLink to={'/ourShop'}>Our Shop</NavLink></li>
+                            <li><Link ><FiShoppingCart className='w-5 h-5' /></Link></li>
                         </ul>
                     </div>
                     <div className="flex gap-1 items-center text-[15px] font-bold">
-                        <NavLink className="hidden sm:flex">Sign In</NavLink>
-                        <NavLink><FaCircleUser className='w-5 h-5' /></NavLink>
+                        <NavLink to={'/signIn'} className="hidden sm:flex">Sign In</NavLink>
+                        <Link><FaCircleUser className='w-5 h-5' /></Link>
                     </div>
                 </div>
             </div>

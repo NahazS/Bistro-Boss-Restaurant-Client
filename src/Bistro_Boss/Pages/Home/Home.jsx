@@ -7,11 +7,12 @@ import ContactUsHome from './Component/ContactUsHome';
 import ChefRecommend from './Component/ChefRecommend';
 import FromOurMenu from './Component/FromOurMenu';
 import ReviewSection from './Component/ReviewSection';
+import axios from 'axios';
 
 const Home = () => {
     const [food, setFood] = useState([])
     useEffect(() => {
-        fetch('/fakeData.json')
+        fetch('http://localhost:3000/foodMenu?limit=10')
         .then(res => res.json())
         .then(data => setFood(data))
     },[])
