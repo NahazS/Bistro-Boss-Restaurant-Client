@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SectionTitle from '../../../../AllCommonDiv/SectionTitle';
+import SectionTitle from '../../../AllCommonDiv/SectionTitle';
 import MenuCard from '../../../AllCard/MenuCard';
 
 const OurMenuHome = ({menu}) => {

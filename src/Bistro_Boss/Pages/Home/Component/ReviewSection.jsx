@@ -5,7 +5,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { SwiperSlide, Swiper } from 'swiper/react';
 import ReviewSlide from '../../../AllSlide/ReviewSlide';
-import SectionTitle from '../../../../AllCommonDiv/SectionTitle';
+import SectionTitle from '../../../AllCommonDiv/SectionTitle';
 
 const ReviewSection = () => {
     return (

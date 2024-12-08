@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionTitle from '../../../../AllCommonDiv/SectionTitle';
+import SectionTitle from '../../../AllCommonDiv/SectionTitle';
 
 const FromOurMenu = () => {
     return (

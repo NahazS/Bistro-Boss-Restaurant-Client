@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionTitle from '../../../../AllCommonDiv/SectionTitle';
+import SectionTitle from '../../../AllCommonDiv/SectionTitle';
 import FoodCard from '../../../AllCard/FoodCard';
 
 const ChefRecommend = ({chefFood}) => {

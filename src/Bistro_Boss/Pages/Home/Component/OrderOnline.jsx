@@ -1,5 +1,5 @@
 import React from 'react';
-import SectionTitle from '../../../../AllCommonDiv/SectionTitle';
+import SectionTitle from '../../../AllCommonDiv/SectionTitle';
 import OrderOnlineSlide from '../../../AllSlide/OrderOnlineSlide';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
