@@ -1,11 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaFacebookF, FaGoogle, FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form"
 import { AuthContext } from '../../../Provider/AuthProvider';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 const SignIn = () => {
-    const {userSignUp, updateUser} = useContext(AuthContext)
-    const {register, watch, handleSubmit, formState: { errors }} = useForm()
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
+    const {userSignUp, updateUser, userSignUpGoogle} = useContext(AuthContext)
+    const {register, watch, handleSubmit, formState: { errors }, reset} = useForm()
     const onSubmit = (data) => {
         const name = data.name
         const photo = data.photo
@@ -14,11 +18,49 @@ const SignIn = () => {
         userSignUp(email, password)
         .then(() => {
             updateUser(name, photo)
-            .then(() => console.log("Successfully updated user profile"))
+            .then(() => {
+              const user = {name, email, photo}
+              axiosPublic.post('/users', user)
+              .then(res => {
+                if (res.data.insertedId) {
+                  console.log('user added to the database')
+                  reset();
+                  Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: 'User created successfully.',
+                      showConfirmButton: false,
+                      timer: 1500
+                  });
+                  navigate('/');
+                }
+              })
+              console.log("Successfully updated user profile")
+            })
             .catch((error) => console.log("Profile Update Error: ", error.message));
         })
         .catch(error => console.log(error.message))
         console.log(data)
+    }
+    const handleGoogleSignUp = () => {
+      userSignUpGoogle()
+      .then(result => {
+        axiosPublic.post('/users', user)
+        .then(res => {
+          if (res.data.insertedId) {
+            console.log('user added to the database')
+          }
+        })
+        console.log(result)
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'User created successfully.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })
+      .catch(error => console.log(error.message))
     }
     return (
         <div className="bg-[url('https://i.ibb.co.com/BnnrYJQ/authentication.png')] bg-cover bg-no-repeat py-4 xl:py-0 px-5 xl:px-0 h-screen w-screen flex justify-center items-center">
@@ -61,14 +103,14 @@ const SignIn = () => {
                       <div className="form-control mt-6">
                         <button className="btn bg-[#d6bb8b]">SignUp</button>
                       </div>
-                      <h5 className='text-[#D1A054] text-[16px] font-Inter font-medium text-center'>Already registered?<Link to={'/signIn'}>Go to log in</Link></h5>
-                      <h4 className='text-[#444] text-[20px] font-Inter font-medium text-center'>Or sign in with</h4>
-                      <div className='flex mx-auto gap-x-[30px]'>
-                        <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaFacebookF /></button>
-                        <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGoogle /></button>
-                        <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGithub /></button>
-                      </div>
                     </form>
+                    <h5 className='text-[#D1A054] text-[16px] font-Inter font-medium text-center'>Already registered?<Link to={'/signIn'}>Go to log in</Link></h5>
+                    <h4 className='text-[#444] text-[20px] font-Inter font-medium text-center'>Or sign in with</h4>
+                    <div className='flex mx-auto gap-x-[30px]'>
+                      <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaFacebookF /></button>
+                      <button onClick={handleGoogleSignUp} className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGoogle /></button>
+                      <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGithub /></button>
+                    </div>
                     <img className='flex sm:hidden' src="https://i.ibb.co.com/NYMTSwY/authentication2.png" alt="" />
                 </div>
             </div>

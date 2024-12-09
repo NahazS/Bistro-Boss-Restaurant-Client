@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.13.5",
     "@mui/material": "^6.1.10",
     "@mui/styled-engine-sc": "^6.1.10",
+    "@tanstack/react-query": "^5.62.3",
     "axios": "^1.7.9",
     "firebase": "^11.0.2",
     "react": "^18.3.1",
@@ -26,6 +27,7 @@
     "react-simple-captcha": "^9.3.1",
     "react-tabtab": "^2.0.0",
     "styled-components": "^6.1.13",
+    "sweetalert2": "^11.14.5",
     "swiper": "^11.1.15"
   },
   "devDependencies": {

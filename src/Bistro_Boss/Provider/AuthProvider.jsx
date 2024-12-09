@@ -1,10 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../Firebase/firebase.config';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
+    const axiosPublic = useAxiosPublic()
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
     const userSignUp = (email, password) => {
@@ -16,6 +18,11 @@ const AuthProvider = ({children}) => {
             photoURL: photo
         })
     } 
+
+    const userSignUpGoogle = () => {
+        const provider = new GoogleAuthProvider()
+        return signInWithPopup(auth, provider)
+    }
     const userSignIn = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)
     }
@@ -24,6 +31,17 @@ const AuthProvider = ({children}) => {
     }
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, newUser => {
+            if(newUser){
+                const userInfo = {email: newUser.email}
+                axiosPublic.post('/jwt', userInfo)
+                .then(res => {
+                    if(res.data.token){
+                        localStorage.setItem('token', res.data.token)
+                    } 
+                })
+            } else{
+                localStorage.removeItem('token')
+            }
             setUser(newUser)
             setLoading(false)
         })
@@ -35,6 +53,7 @@ const AuthProvider = ({children}) => {
         loading,
         setLoading,
         userSignUp,
+        userSignUpGoogle,
         userSignIn,
         userSignOut,
         updateUser

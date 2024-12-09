@@ -3,7 +3,10 @@ import { IoMenu } from "react-icons/io5";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaCircleUser } from "react-icons/fa6";
 import { Link, NavLink } from 'react-router-dom';
+import useCart from '../Hooks/useCart';
 const Navbar = () => {
+    const {cart} = useCart()
+    console.log(cart)
     return (
         <div className='relative z-50 bg-[#151515] bg-opacity-50'>
             <div className="navbar justify-between items-center text-white h-[95px] px-5 xl:px-0 xl:max-w-[1170px] mx-auto">
@@ -21,10 +24,10 @@ const Navbar = () => {
                           className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box z-[1] mt-3 w-fit px-5 p-2 shadow text-[15px]">
                           <li><NavLink to={'/'}>Home</NavLink></li>
                           <li><NavLink to={'/contactUs'}>Contact us</NavLink></li>
-                          <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+                          <li><NavLink to={'/dashboard/userHome'}>Dashboard</NavLink></li>
                           <li><NavLink to={'/ourMenu'}>Our Menu</NavLink></li>
                           <li><NavLink to={'/ourShop'}>Our Shop</NavLink></li>
-                          <li><Link>Shopping Cart</Link></li>
+                          <li><NavLink to={'/dashboard/myCart'}>Shopping Cart</NavLink></li>
                           <li>Sign Out</li>
                         </ul>
                     </div>  
@@ -32,10 +35,10 @@ const Navbar = () => {
                         <ul className="menu menu-horizontal px-1 items-center text-[15px] font-bold">
                             <li><NavLink to={'/'}>Home</NavLink></li>
                             <li><NavLink to={'/contactUs'}>Contact us</NavLink></li>
-                            <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
+                            <li><NavLink to={'/dashboard/userHome'}>Dashboard</NavLink></li>
                             <li><NavLink to={'/ourMenu'}>Our Menu</NavLink></li>
                             <li><NavLink to={'/ourShop'}>Our Shop</NavLink></li>
-                            <li><Link ><FiShoppingCart className='w-5 h-5' /></Link></li>
+                            <li><NavLink to={'/dashboard/myCart'} className='btn border-none' ><FiShoppingCart className='w-5 h-5' /><div className="badge bg-transparent text-white border-none ml-[-15px] mt-[-15px]">+{cart.length}</div></NavLink></li>
                         </ul>
                     </div>
                     <div className="flex gap-1 items-center text-[15px] font-bold">

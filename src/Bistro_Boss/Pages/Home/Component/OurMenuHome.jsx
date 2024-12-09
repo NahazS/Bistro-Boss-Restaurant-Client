@@ -10,7 +10,7 @@ const OurMenuHome = ({menu}) => {
             <div className='flex justify-center mb-9'><SectionTitle title={"FROM OUR MENU"} subTitle={"Check it out"}></SectionTitle></div>
             <div className='flex gap-[18px] flex-wrap mx-auto justify-center'>
                 {
-                    showData.map(data => <MenuCard menu={data}></MenuCard>)
+                    showData.map(data => <MenuCard key={data._id} menu={data}></MenuCard>)
                 }
             </div>
             <button className='btn border-black border-[3px] border-t-0 border-x-0 max-w-[177px] mx-auto flex mt-9'>View Full  Menu</button>

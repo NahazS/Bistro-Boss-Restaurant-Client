@@ -5,8 +5,11 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Loading from '../../LoadingErrorPage/Loading';
+import Swal from 'sweetalert2';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 const SignIn = () => {
-    const {userSignIn, user, userSignOut, loading} = useContext(AuthContext)
+    const axiosPublic = useAxiosPublic()
+    const {userSignIn, user, userSignOut, loading, userSignUpGoogle} = useContext(AuthContext)
     if(loading)
     {
         return <h1>loading</h1>
@@ -31,11 +34,40 @@ const SignIn = () => {
         .then((result) => {
             console.log(result.user)
             reset();
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'signIn successfully.',
+              showConfirmButton: false,
+              timer: 1500
+            });
         })
         .catch(error => {
             console.log(error.message)
             setSignInError(error.message)
         })
+    }
+    const handleGoogleSignUp = () => {
+      userSignUpGoogle()
+      .then(result => {
+        console.log(result)
+        const userData = {name: result.user.displayName, email: result.user.email, photo: result.user.photoURL}
+        axiosPublic.post('/users', userData)
+        .then(res => {
+          if (res.data.insertedId) {
+            console.log('user added to the database')
+          }
+          console.log(res.data)
+        })
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'SignIn successfully.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })
+      .catch(error => console.log(error.message))
     }
     const handleSignOut = () => {
         userSignOut()
@@ -83,14 +115,14 @@ const SignIn = () => {
                         <button disabled={!isValid} className={`btn bg-[#d6bb8b] ${user && 'hidden'}`}>SignIn</button>
                         <button onClick={handleSignOut} className={`btn bg-[#d6bb8b] ${!user && 'hidden'}`}>SignOut</button>
                       </div>
-                      <h5 className='text-[#D1A054] text-[16px] font-Inter font-medium text-center'>New here?<Link to={'/signUp'}>Create a New Account</Link></h5>
-                      <h4 className='text-[#444] text-[20px] font-Inter font-medium text-center'>Or sign in with</h4>
-                      <div className='flex mx-auto gap-x-[30px]'>
-                        <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaFacebookF /></button>
-                        <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGoogle /></button>
-                        <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGithub /></button>
-                      </div>
                     </form>
+                    <h5 className='text-[#D1A054] text-[16px] font-Inter font-medium text-center'>New here?<Link to={'/signUp'}>Create a New Account</Link></h5>
+                    <h4 className='text-[#444] text-[20px] font-Inter font-medium text-center'>Or sign in with</h4>
+                    <div className='flex mx-auto gap-x-[30px]'>
+                      <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaFacebookF /></button>
+                      <button onClick={handleGoogleSignUp} className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGoogle /></button>
+                      <button className='w-[40px] h-[40px] flex items-center justify-center border-2 border-[#444] rounded-full'><FaGithub /></button>
+                    </div>
                     <img className='flex sm:hidden' src="https://i.ibb.co.com/NYMTSwY/authentication2.png" alt="" />
                 </div>
             </div>
