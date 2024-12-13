@@ -7,7 +7,7 @@ import useAxiosSecure from '../../../../../../Hooks/useAxiosSecure';
 import { FaUsers } from 'react-icons/fa6';
 import { GrUserAdmin } from 'react-icons/gr';
 
-const TableBody = ({user,index, refetch}) => {
+const TableBody = ({item,index, refetch}) => {
     const axiosSecure = useAxiosSecure()
     const handleDeleteCartUser = () => {
         Swal.fire({
@@ -63,9 +63,9 @@ const TableBody = ({user,index, refetch}) => {
 
             <tr>
                 <th>{index+1}</th>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user?.role === 'admin' ? <div className='bg-[#D1A054] btn px-0 flex flex-col text-white items-center'><GrUserAdmin></GrUserAdmin><h1>Admin</h1></div> : <button onClick={handleMakeAdmin} className='btn bg-[#D1A054] text-white'><FaUsers></FaUsers></button>}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item?.role === 'admin' ? <div className='bg-[#D1A054] btn px-0 flex flex-col text-white items-center'><GrUserAdmin></GrUserAdmin><h1>Admin</h1></div> : <button onClick={handleMakeAdmin} className='btn bg-[#D1A054] text-white'><FaUsers></FaUsers></button>}</td>
                 <td><button onClick={handleDeleteCartUser} className='btn bg-[#B91C1C] hover:bg-[#B91C1C] hover:bg-opacity-50 border-none text-white'><FaTrash></FaTrash></button></td>
             </tr>
 

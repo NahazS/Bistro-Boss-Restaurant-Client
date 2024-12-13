@@ -18,6 +18,8 @@ import AddItems from "../Pages/Dashboard/Children/Admin/AddItems/AddItems";
 import ManageItems from "../Pages/Dashboard/Children/Admin/ManageItems/ManageItems";
 import ManageBookings from "../Pages/Dashboard/Children/Admin/ManageBookings/ManageBookings";
 import AllUsers from "../Pages/Dashboard/Children/Admin/AllUsers/AllUsers";
+import UpdateItem from "../Pages/Dashboard/Children/Admin/UpdateItem/UpdateItem";
+import Payment from "../Pages/Dashboard/Children/User/Payment/Payment";
 
 const Router = createBrowserRouter([
     {
@@ -71,8 +73,17 @@ const Router = createBrowserRouter([
                 element: <MyCart></MyCart>
             },
             {
+                path: 'payment',
+                element: <Payment></Payment>
+            },
+            {
                 path: 'addReview',
                 element: <AddReview></AddReview>
+            },
+            {
+                path: 'updateItem/:id',
+                element: <UpdateItem></UpdateItem>,
+                loader: ({params}) => fetch(`http://localhost:3000/foodMenu/${params.id}`)
             },
             {
                 path: 'myBooking',

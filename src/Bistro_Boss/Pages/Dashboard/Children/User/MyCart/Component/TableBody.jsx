@@ -4,8 +4,7 @@ import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useCart from '../../../../../../Hooks/useCart';
 
-const TableBody = ({item,index}) => {
-    const {refetch} = useCart()
+const TableBody = ({item,index, refetch}) => {
     const handleDeleteCartItem = () => {
         Swal.fire({
             title: "Are you sure?",
