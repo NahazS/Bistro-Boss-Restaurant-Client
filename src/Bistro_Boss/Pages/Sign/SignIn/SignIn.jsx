@@ -17,7 +17,7 @@ const SignIn = () => {
     const {register, handleSubmit, formState:{errors}, reset} = useForm()
     const [signInError, setSignInError] = useState(null)
     useEffect(() => {
-        loadCaptchaEnginge(10,'transparent');
+        loadCaptchaEnginge(2,'transparent');
     }, [])
     const [isValid, setIsValid] = useState(false)
     

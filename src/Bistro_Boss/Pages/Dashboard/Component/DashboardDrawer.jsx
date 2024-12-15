@@ -3,7 +3,14 @@ import { NavLink } from 'react-router-dom';
 import { FaHome, FaCalendarAlt, FaWallet, FaShoppingCart, FaCalendarCheck } from "react-icons/fa";
 import { MdEmail, MdMenu, MdRateReview } from "react-icons/md";
 import { FaBagShopping, FaBook, FaUsers, FaUtensils } from 'react-icons/fa6';
-const DashboardDrawer = ({isAdmin}) => {
+import useAdmin from '../../../Hooks/useAdmin';
+const DashboardDrawer = () => {
+  const [isAdmin, isPending] = useAdmin()
+  if(isPending)
+  {
+      return <h1>loading</h1>
+  }
+  console.log(isAdmin)
     return (
         <div>
             <div className="drawer lg:drawer-open h-full z-50">
