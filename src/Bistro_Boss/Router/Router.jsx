@@ -9,7 +9,7 @@ import SignIn from "../Pages/Sign/SignIn/SignIn";
 import SignUp from "../Pages/Sign/SignUp/SignUp";
 import UserHome from "../Pages/Dashboard/Children/User/UserHome/UserHome";
 import Reservation from "../Pages/Dashboard/Children/User/Reservation/Reservation";
-import PaymentHistory from "../Pages/Dashboard/Children/User/PaymentHistory/PaymentHestory";
+import PaymentHistory from "../Pages/Dashboard/Children/User/PaymentHistory/PaymentHistory";
 import MyCart from "../Pages/Dashboard/Children/User/MyCart/MyCart";
 import AddReview from "../Pages/Dashboard/Children/User/AddReview/AddReview";
 import MyBooking from "../Pages/Dashboard/Children/User/MyBooking/MyBooking";
