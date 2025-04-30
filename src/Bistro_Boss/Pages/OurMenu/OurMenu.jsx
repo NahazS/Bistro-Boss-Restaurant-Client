@@ -16,11 +16,11 @@ const OurMenu = () => {
     useEffect(() => {
         const fetchData = async () => {
         const [offerRes, dessertRes, pizzaRes, saladRes, soupRes] = await Promise.all([
-            axios.get('http://localhost:3000/foodMenu?category=offered'),
-            axios.get('http://localhost:3000/foodMenu?category=dessert&limit=6'),
-            axios.get('http://localhost:3000/foodMenu?category=pizza&limit=9'),
-            axios.get('http://localhost:3000/foodMenu?category=salad&limit=8'),
-            axios.get('http://localhost:3000/foodMenu?category=soup&limit=6'),
+            axios.get('https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu?category=offered'),
+            axios.get('https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu?category=dessert&limit=6'),
+            axios.get('https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu?category=pizza&limit=9'),
+            axios.get('https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu?category=salad&limit=8'),
+            axios.get('https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu?category=soup&limit=6'),
         ]);
   
         setTodaysOffer(offerRes.data);

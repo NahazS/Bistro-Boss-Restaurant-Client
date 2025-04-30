@@ -10,7 +10,7 @@ const useCart = () => {
     const { refetch, data: cart = [] } = useQuery({
         queryKey: ['cart', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`http://localhost:3000/cart?email=${user.email}`);
+            const res = await axiosSecure.get(`https://bistro-boss-restaurant-server-ashen.vercel.app/cart?email=${user.email}`);
             return res.data;
         },
     });

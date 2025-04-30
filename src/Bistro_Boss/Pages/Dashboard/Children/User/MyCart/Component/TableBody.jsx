@@ -17,7 +17,7 @@ const TableBody = ({item,index, refetch}) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:3000/cart/${item._id}`)
+                axios.delete(`https://bistro-boss-restaurant-server-ashen.vercel.app/cart/${item._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch();

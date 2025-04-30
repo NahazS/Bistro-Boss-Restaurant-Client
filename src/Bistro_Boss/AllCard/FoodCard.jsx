@@ -13,7 +13,7 @@ const FoodCard = ({food}) => {
     const handleAddCart = () => {
       if(user && user.email)
       {
-        axios.post('http://localhost:3000/cart',{
+        axios.post('https://bistro-boss-restaurant-server-ashen.vercel.app/cart',{
           menuId: _id,
           email: user.email,
           name,

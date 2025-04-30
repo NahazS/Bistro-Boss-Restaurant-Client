@@ -8,7 +8,7 @@ const ShowItemCard = ({category}) => {
     const [totalPage, setTotalPage] = useState(1)
     const limit = 8
     const fetchData = async (page = 1) => {
-        const res = await fetch(`http://localhost:3000/foodMenu?category=${category}&page=${page}&limit=${limit}`);
+        const res = await fetch(`https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu?category=${category}&page=${page}&limit=${limit}`);
         const data = await res.json();
         setShowFood(data.data);
         setCurrentPage(data.currentPage);

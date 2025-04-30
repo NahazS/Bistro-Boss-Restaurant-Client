@@ -83,7 +83,7 @@ const Router = createBrowserRouter([
             {
                 path: 'updateItem/:id',
                 element: <UpdateItem></UpdateItem>,
-                loader: ({params}) => fetch(`http://localhost:3000/foodMenu/${params.id}`)
+                loader: ({params}) => fetch(`https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu/${params.id}`)
             },
             {
                 path: 'myBooking',

@@ -17,7 +17,7 @@ const AllUsers = () => {
     })
     const table = {
         titles: [{title: "Total Users", value: users.length}],
-        totalItem: ["Item Image", "Item Name", "Price", "Action"],
+        totalItem: ["Item Image", "Item Name", "Role", "Action"],
     }
     return (
         <div className='flex flex-col items-center bg-[#F6F6F6] w-full'>

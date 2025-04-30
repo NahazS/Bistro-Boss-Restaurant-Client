@@ -12,7 +12,7 @@ import axios from 'axios';
 const Home = () => {
     const [food, setFood] = useState([])
     useEffect(() => {
-        fetch('http://localhost:3000/foodMenu?limit=10')
+        fetch('https://bistro-boss-restaurant-server-ashen.vercel.app/foodMenu?limit=10')
         .then(res => res.json())
         .then(data => setFood(data))
     },[])
